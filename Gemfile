@@ -29,6 +29,7 @@ gem 'spring',        group: :development
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0.rc1'
   gem 'sqlite3'
+  gem 'capybara'
 end
 
 group :production do
