@@ -148,6 +148,10 @@ describe PhoneNumbersController do
   end
 
   describe "DELETE destroy" do
+
+    let (:bob) {Person.create(first_name: 'Bob', last_name: 'Smith')}
+    let (:valid_attributes) {{number: "123435345", person_id: bob.id}}
+
     it "destroys the requested phone_number" do
       phone_number = PhoneNumber.create! valid_attributes
       expect {
@@ -158,7 +162,7 @@ describe PhoneNumbersController do
     it "redirects to the phone_numbers list" do
       phone_number = PhoneNumber.create! valid_attributes
       delete :destroy, {:id => phone_number.to_param}, valid_session
-      response.should redirect_to(phone_numbers_url)
+      response.should redirect_to(bob)
     end
   end
 
