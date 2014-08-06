@@ -21,7 +21,9 @@
 
 <p>
   <% @person.email_addresses.each do |email| %>
-    <li><%= email.email %></li>
+    <li><%= email.email %>
+        <%= link_to 'edit', edit_email_address_path(email)%>
+    </li>
   <% end %>
 </p>
 <%= link_to "Add email address", new_email_address_path(person_id: @person.id) %>
