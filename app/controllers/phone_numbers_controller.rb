@@ -9,7 +9,7 @@ class PhoneNumbersController < ApplicationController
   end
 
   def new
-    @phone_number = PhoneNumber.new(contact_id: params[:contact_id], contact_type: 'Person')
+    @phone_number = PhoneNumber.new(contact_id: params[:contact_id], contact_type: params[:contact_type])
   end
 
   def edit
