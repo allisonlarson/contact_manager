@@ -85,7 +85,6 @@ describe 'the person view', type: :feature do
     end
 
     it 'edits email addresses' do
-      pending
       email = person.email_addresses.first
       old_email = email.email
 
