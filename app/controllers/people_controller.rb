@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_action :set_person, only: [:show, :edit, :update, :destroy]
+  before_action :find_resource, only: [:show, :edit, :update, :destroy]
 
   def index
     @people = Person.all
@@ -50,9 +50,6 @@ class PeopleController < ApplicationController
   end
 
   private
-    def set_person
-      @person = Person.find(params[:id])
-    end
 
     def person_params
       params.require(:person).permit(:first_name, :last_name, :contact_type)

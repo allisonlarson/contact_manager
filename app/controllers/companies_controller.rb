@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :find_resource, only: [:show, :edit, :update, :destroy]
 
   def index
     @companies = Company.all
@@ -50,9 +50,6 @@ class CompaniesController < ApplicationController
   end
 
   private
-    def set_company
-      @company = Company.find(params[:id])
-    end
 
     def company_params
       params.require(:company).permit(:name)
