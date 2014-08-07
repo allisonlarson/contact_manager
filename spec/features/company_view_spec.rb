@@ -58,4 +58,54 @@ describe 'the company view', type: :feature do
       expect(page).to_not have_content(bad_number.number)
     end
   end
+
+  describe 'has email addresses that' do
+    let(:company) { Company.create(name: 'Walmart') }
+
+    before(:each) do
+      company.email_addresses.create(email: "email@email.com")
+      company.email_addresses.create(email: "admin@admin.com")
+      visit company_path(company)
+    end
+
+    it 'has a list of email addresses' do
+      expect(page).to have_selector('li', text: company.email_addresses.first.email)
+    end
+
+    it 'has an add email address link' do
+      expect(page).to have_link('Add email address', href: new_email_address_path(contact_id: company.id, contact_type: 'Company'))
+    end
+
+    it 'creates a new email address' do
+      page.click_link('Add email address')
+      fill_in 'Email', with: 'new@email.com'
+      page.click_on('Create Email address')
+      expect(current_path).to eq(company_path(company))
+      expect(page).to have_content('new@email.com')
+    end
+
+    it 'edits email addresses' do
+      email = company.email_addresses.first
+      old_email = email.email
+
+      first(:link, 'edit').click
+      page.fill_in('Email', with: 'new@email.com')
+      page.click_button('Update Email address')
+      expect(current_path).to eq(company_path(company))
+      expect(page).to have_content('new@email.com')
+      expect(page).to_not have_content(old_email)
+    end
+
+    it 'deletes email addresses' do
+      bad_email = company.email_addresses.first
+      good_email = company.email_addresses.last
+
+      first(:link, 'delete').click
+      expect(current_path).to eq(company_path(company))
+      expect(page).to have_content(good_email.email)
+      expect(page).to_not have_content(bad_email.email)
+    end
+
+  end
+
 end
