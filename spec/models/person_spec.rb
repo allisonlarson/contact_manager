@@ -26,6 +26,6 @@ describe Person do
 
   it 'responds with its created email addresses' do
     person.email_addresses.build(email: 'me@example.com')
-    expect(person.email_addresses.map(&:email)).to eq(['me@example.com'])
+      expect(person.email_addresses.map(&:email)).to eq(['me@example.com'])
   end
 end

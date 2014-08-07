@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EmailAddressesController do
 
-  let(:valid_attributes) { { "email" => "MyString", "person_id" => 1} }
+  let(:valid_attributes) { { "email" => "MyString", "contact_id" => 1, "contact_type" => 'Person'} }
   let(:valid_session) { {} }
 
   describe "GET index" do
@@ -39,7 +39,7 @@ describe EmailAddressesController do
   describe "POST create" do
     describe "with valid params" do
       let(:alice) { Person.create(first_name: 'Alice', last_name: 'Smith')}
-      let(:valid_attributes) {{email: '555-1234', person_id: alice.id}}
+      let(:valid_attributes) {{email: '555-1234', contact_id: alice.id, contact_type: 'Person'}}
       it "creates a new EmailAddress" do
         expect {
           post :create, {:email_address => valid_attributes}, valid_session
@@ -76,7 +76,7 @@ describe EmailAddressesController do
   describe "PUT update" do
     describe "with valid params" do
       let(:bob) {Person.create(first_name: 'Bob', last_name: 'Smith')}
-      let(:valid_attributes) {{email: 'email@email.com', person_id: bob.id}}
+      let(:valid_attributes) {{email: 'email@email.com', contact_id: bob.id, contact_type: 'Person'}}
 
       it "updates the requested email_address" do
         email_address = EmailAddress.create! valid_attributes
@@ -87,7 +87,7 @@ describe EmailAddressesController do
 
       it "assigns the requested email_address as @email_address" do
         email_address = EmailAddress.create! valid_attributes
-      put :update, {:id => email_address.to_param, :email_address => valid_attributes}, valid_session
+        put :update, {:id => email_address.to_param, :email_address => valid_attributes}, valid_session
         assigns(:email_address).should eq(email_address)
       end
 
@@ -117,7 +117,7 @@ describe EmailAddressesController do
 
   describe "DELETE destroy" do
     let(:bob) {Person.create(first_name: 'Bob', last_name: 'Smith')}
-    let(:valid_attributes) {{email: 'email@email.com', person_id: bob.id}}
+    let(:valid_attributes) {{email: 'email@email.com', contact_id: bob.id, contact_type: 'Person'}}
 
     it "destroys the requested email_address" do
       email_address = EmailAddress.create! valid_attributes

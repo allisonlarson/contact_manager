@@ -20,4 +20,14 @@ describe Company do
     phone_number = walmart.phone_numbers.build(number: "333-4444")
     expect(phone_number.number).to eq('333-4444')
   end
+
+  it 'has an array of email addresses' do
+    expect(walmart.email_addresses).to eq([])
+  end
+
+  it "responds with its email addresses after they're created" do
+    email_address = walmart.email_addresses.build(email: "email")
+    expect(email_address.email).to eq('email')
+  end
+
 end
