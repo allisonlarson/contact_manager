@@ -30,4 +30,8 @@ describe Company do
     expect(email_address.email).to eq('email')
   end
 
+  it "convert to a string with name of company" do
+    expect(walmart.to_s).to eq "Walmart"
+  end
+
 end

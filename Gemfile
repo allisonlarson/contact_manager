@@ -37,6 +37,7 @@ group :production do
 end
 
 gem 'unicorn'
+gem 'haml', '~> 3.1.8'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
